@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { OpenAI } from 'openai'
 import jwt from 'jsonwebtoken'
-import { pool } from './db'
+import { pool } from './db.js'
 
 const chatRouter = Router()
 const JWT_SECRET = process.env.JWT_SECRET || 'your-jwt-secret-key'
