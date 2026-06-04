@@ -2,13 +2,13 @@ import dotenv from 'dotenv'
 dotenv.config({ path: '.env.local' })
 
 import express from 'express'
-import { corsMiddleware } from './corsMiddleware'
-import userRouter from './user'
-import featureRouter from './feature'
-import chatRouter from './chat'
-import shopRouter, { seedShopProducts } from './shop'
-import healthRouter from './health'
-import { ensureDatabaseSchema, testDatabaseConnection } from './db'
+import { corsMiddleware } from './corsMiddleware.js'
+import userRouter from './user.js'
+import featureRouter from './feature.js'
+import chatRouter from './chat.js'
+import shopRouter, { seedShopProducts } from './shop.js'
+import healthRouter from './health.js'
+import { ensureDatabaseSchema, testDatabaseConnection } from './db.js'
 
 const app = express()
 const PORT = 3000
