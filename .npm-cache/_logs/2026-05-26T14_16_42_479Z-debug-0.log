@@ -1,0 +1,233 @@
+0 verbose cli /Users/yan/.nvm/versions/node/v22.18.0/bin/node /Users/yan/.nvm/versions/node/v22.18.0/bin/npm
+1 info using npm@10.9.3
+2 info using node@v22.18.0
+3 silly config load:file:/Users/yan/.nvm/versions/node/v22.18.0/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/yan/ZhikangAI/backend/.npmrc
+5 silly config load:file:/Users/yan/.npmrc
+6 silly config load:file:/Users/yan/.nvm/versions/node/v22.18.0/etc/npmrc
+7 verbose title npm install jsonwebtoken @types/jsonwebtoken
+8 verbose argv "install" "jsonwebtoken" "@types/jsonwebtoken" "--cache" "/Users/yan/ZhikangAI/backend/.npm-cache"
+9 verbose logfile logs-max:10 dir:/Users/yan/ZhikangAI/backend/.npm-cache/_logs/2026-05-26T14_16_42_479Z-
+10 verbose logfile /Users/yan/ZhikangAI/backend/.npm-cache/_logs/2026-05-26T14_16_42_479Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+13 silly idealTree buildDeps
+14 silly fetch manifest @types/jsonwebtoken@^9.0.10
+15 silly packumentCache full:https://registry.npmjs.org/@types%2fjsonwebtoken cache-miss
+16 http cache https://registry.npmjs.org/@types%2fjsonwebtoken 10ms (cache hit)
+17 silly packumentCache full:https://registry.npmjs.org/@types%2fjsonwebtoken set size:129919 disposed:false
+18 silly fetch manifest jsonwebtoken@^9.0.3
+19 silly packumentCache full:https://registry.npmjs.org/jsonwebtoken cache-miss
+20 http cache https://registry.npmjs.org/jsonwebtoken 2ms (cache hit)
+21 silly packumentCache full:https://registry.npmjs.org/jsonwebtoken set size:183545 disposed:false
+22 silly placeDep ROOT @types/jsonwebtoken@9.0.10 REPLACE for: backend@1.0.0 want: ^9.0.10
+23 silly placeDep ROOT jsonwebtoken@9.0.3 REPLACE for: backend@1.0.0 want: ^9.0.3
+24 silly reify moves {}
+25 silly audit bulk request {
+25 silly audit   '@esbuild/aix-ppc64': [ '0.28.0' ],
+25 silly audit   '@esbuild/android-arm': [ '0.28.0' ],
+25 silly audit   '@esbuild/android-arm64': [ '0.28.0' ],
+25 silly audit   '@esbuild/android-x64': [ '0.28.0' ],
+25 silly audit   '@esbuild/darwin-arm64': [ '0.28.0' ],
+25 silly audit   '@esbuild/darwin-x64': [ '0.28.0' ],
+25 silly audit   '@esbuild/freebsd-arm64': [ '0.28.0' ],
+25 silly audit   '@esbuild/freebsd-x64': [ '0.28.0' ],
+25 silly audit   '@esbuild/linux-arm': [ '0.28.0' ],
+25 silly audit   '@esbuild/linux-arm64': [ '0.28.0' ],
+25 silly audit   '@esbuild/linux-ia32': [ '0.28.0' ],
+25 silly audit   '@esbuild/linux-loong64': [ '0.28.0' ],
+25 silly audit   '@esbuild/linux-mips64el': [ '0.28.0' ],
+25 silly audit   '@esbuild/linux-ppc64': [ '0.28.0' ],
+25 silly audit   '@esbuild/linux-riscv64': [ '0.28.0' ],
+25 silly audit   '@esbuild/linux-s390x': [ '0.28.0' ],
+25 silly audit   '@esbuild/linux-x64': [ '0.28.0' ],
+25 silly audit   '@esbuild/netbsd-arm64': [ '0.28.0' ],
+25 silly audit   '@esbuild/netbsd-x64': [ '0.28.0' ],
+25 silly audit   '@esbuild/openbsd-arm64': [ '0.28.0' ],
+25 silly audit   '@esbuild/openbsd-x64': [ '0.28.0' ],
+25 silly audit   '@esbuild/openharmony-arm64': [ '0.28.0' ],
+25 silly audit   '@esbuild/sunos-x64': [ '0.28.0' ],
+25 silly audit   '@esbuild/win32-arm64': [ '0.28.0' ],
+25 silly audit   '@esbuild/win32-ia32': [ '0.28.0' ],
+25 silly audit   '@esbuild/win32-x64': [ '0.28.0' ],
+25 silly audit   '@types/body-parser': [ '1.19.6' ],
+25 silly audit   '@types/connect': [ '3.4.38' ],
+25 silly audit   '@types/express': [ '5.0.6' ],
+25 silly audit   '@types/express-serve-static-core': [ '5.1.1' ],
+25 silly audit   '@types/http-errors': [ '2.0.5' ],
+25 silly audit   '@types/ms': [ '2.1.0' ],
+25 silly audit   '@types/node': [ '25.9.1' ],
+25 silly audit   '@types/qs': [ '6.15.1' ],
+25 silly audit   '@types/range-parser': [ '1.2.7' ],
+25 silly audit   '@types/send': [ '1.2.1' ],
+25 silly audit   '@types/serve-static': [ '2.2.0' ],
+25 silly audit   accepts: [ '2.0.0' ],
+25 silly audit   'body-parser': [ '2.2.2' ],
+25 silly audit   'buffer-equal-constant-time': [ '1.0.1' ],
+25 silly audit   bytes: [ '3.1.2' ],
+25 silly audit   'call-bind-apply-helpers': [ '1.0.2' ],
+25 silly audit   'call-bound': [ '1.0.4' ],
+25 silly audit   'content-disposition': [ '1.1.0' ],
+25 silly audit   'content-type': [ '1.0.5', '2.0.0' ],
+25 silly audit   cookie: [ '0.7.2' ],
+25 silly audit   'cookie-signature': [ '1.2.2' ],
+25 silly audit   debug: [ '4.4.3' ],
+25 silly audit   depd: [ '2.0.0' ],
+25 silly audit   'dunder-proto': [ '1.0.1' ],
+25 silly audit   'ecdsa-sig-formatter': [ '1.0.11' ],
+25 silly audit   'ee-first': [ '1.1.1' ],
+25 silly audit   encodeurl: [ '2.0.0' ],
+25 silly audit   'es-define-property': [ '1.0.1' ],
+25 silly audit   'es-errors': [ '1.3.0' ],
+25 silly audit   'es-object-atoms': [ '1.1.2' ],
+25 silly audit   esbuild: [ '0.28.0' ],
+25 silly audit   'escape-html': [ '1.0.3' ],
+25 silly audit   etag: [ '1.8.1' ],
+25 silly audit   express: [ '5.2.1' ],
+25 silly audit   finalhandler: [ '2.1.1' ],
+25 silly audit   forwarded: [ '0.2.0' ],
+25 silly audit   fresh: [ '2.0.0' ],
+25 silly audit   fsevents: [ '2.3.3' ],
+25 silly audit   'function-bind': [ '1.1.2' ],
+25 silly audit   'get-intrinsic': [ '1.3.0' ],
+25 silly audit   'get-proto': [ '1.0.1' ],
+25 silly audit   gopd: [ '1.2.0' ],
+25 silly audit   'has-symbols': [ '1.1.0' ],
+25 silly audit   hasown: [ '2.0.3' ],
+25 silly audit   'http-errors': [ '2.0.1' ],
+25 silly audit   'iconv-lite': [ '0.7.2' ],
+25 silly audit   inherits: [ '2.0.4' ],
+25 silly audit   'ipaddr.js': [ '1.9.1' ],
+25 silly audit   'is-promise': [ '4.0.0' ],
+25 silly audit   jwa: [ '2.0.1' ],
+25 silly audit   jws: [ '4.0.1' ],
+25 silly audit   'lodash.includes': [ '4.3.0' ],
+25 silly audit   'lodash.isboolean': [ '3.0.3' ],
+25 silly audit   'lodash.isinteger': [ '4.0.4' ],
+25 silly audit   'lodash.isnumber': [ '3.0.3' ],
+25 silly audit   'lodash.isplainobject': [ '4.0.6' ],
+25 silly audit   'lodash.isstring': [ '4.0.1' ],
+25 silly audit   'lodash.once': [ '4.1.1' ],
+25 silly audit   'math-intrinsics': [ '1.1.0' ],
+25 silly audit   'media-typer': [ '1.1.0' ],
+25 silly audit   'merge-descriptors': [ '2.0.0' ],
+25 silly audit   'mime-db': [ '1.54.0' ],
+25 silly audit   'mime-types': [ '3.0.2' ],
+25 silly audit   ms: [ '2.1.3' ],
+25 silly audit   negotiator: [ '1.0.0' ],
+25 silly audit   'object-inspect': [ '1.13.4' ],
+25 silly audit   'on-finished': [ '2.4.1' ],
+25 silly audit   once: [ '1.4.0' ],
+25 silly audit   parseurl: [ '1.3.3' ],
+25 silly audit   'path-to-regexp': [ '8.4.2' ],
+25 silly audit   'proxy-addr': [ '2.0.7' ],
+25 silly audit   qs: [ '6.15.2' ],
+25 silly audit   'range-parser': [ '1.2.1' ],
+25 silly audit   'raw-body': [ '3.0.2' ],
+25 silly audit   router: [ '2.2.0' ],
+25 silly audit   'safe-buffer': [ '5.2.1' ],
+25 silly audit   'safer-buffer': [ '2.1.2' ],
+25 silly audit   semver: [ '7.8.1' ],
+25 silly audit   send: [ '1.2.1' ],
+25 silly audit   'serve-static': [ '2.2.1' ],
+25 silly audit   setprototypeof: [ '1.2.0' ],
+25 silly audit   'side-channel': [ '1.1.0' ],
+25 silly audit   'side-channel-list': [ '1.0.1' ],
+25 silly audit   'side-channel-map': [ '1.0.1' ],
+25 silly audit   'side-channel-weakmap': [ '1.0.2' ],
+25 silly audit   statuses: [ '2.0.2' ],
+25 silly audit   toidentifier: [ '1.0.1' ],
+25 silly audit   tsx: [ '4.22.3' ],
+25 silly audit   'type-is': [ '2.1.0' ],
+25 silly audit   'undici-types': [ '7.24.6' ],
+25 silly audit   unpipe: [ '1.0.0' ],
+25 silly audit   vary: [ '1.1.2' ],
+25 silly audit   wrappy: [ '1.0.2' ],
+25 silly audit   '@types/jsonwebtoken': [ '9.0.10' ],
+25 silly audit   jsonwebtoken: [ '9.0.3' ]
+25 silly audit }
+26 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/win32-x64
+27 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/win32-x64' ]
+28 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/win32-ia32
+29 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/win32-ia32' ]
+30 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/win32-arm64
+31 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/win32-arm64' ]
+32 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/sunos-x64
+33 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/sunos-x64' ]
+34 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/openharmony-arm64
+35 silly reify mark deleted [
+35 silly reify   '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/openharmony-arm64'
+35 silly reify ]
+36 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/openbsd-x64
+37 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/openbsd-x64' ]
+38 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/openbsd-arm64
+39 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/openbsd-arm64' ]
+40 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/netbsd-x64
+41 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/netbsd-x64' ]
+42 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/netbsd-arm64
+43 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/netbsd-arm64' ]
+44 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-x64
+45 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-x64' ]
+46 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-s390x
+47 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-s390x' ]
+48 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-riscv64
+49 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-riscv64' ]
+50 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-ppc64
+51 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-ppc64' ]
+52 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-mips64el
+53 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-mips64el' ]
+54 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-loong64
+55 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-loong64' ]
+56 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-ia32
+57 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-ia32' ]
+58 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-arm64
+59 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-arm64' ]
+60 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-arm
+61 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/linux-arm' ]
+62 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/freebsd-x64
+63 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/freebsd-x64' ]
+64 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/freebsd-arm64
+65 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/freebsd-arm64' ]
+66 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/darwin-x64
+67 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/darwin-x64' ]
+68 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/android-x64
+69 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/android-x64' ]
+70 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/android-arm64
+71 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/android-arm64' ]
+72 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/android-arm
+73 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/android-arm' ]
+74 verbose reify failed optional dependency /Users/yan/ZhikangAI/backend/node_modules/@esbuild/aix-ppc64
+75 silly reify mark deleted [ '/Users/yan/ZhikangAI/backend/node_modules/@esbuild/aix-ppc64' ]
+76 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 1057ms
+77 silly audit report {}
+78 silly ADD
+79 silly ADD
+80 silly ADD
+81 silly ADD
+82 silly ADD
+83 silly ADD
+84 silly ADD
+85 silly ADD
+86 silly ADD
+87 silly ADD
+88 silly ADD
+89 silly ADD
+90 silly ADD
+91 silly ADD
+92 silly ADD
+93 silly ADD
+94 silly ADD
+95 silly ADD
+96 silly ADD
+97 silly ADD
+98 silly ADD
+99 silly ADD
+100 silly ADD
+101 silly ADD
+102 silly ADD
+103 verbose cwd /Users/yan/ZhikangAI/backend
+104 verbose os Darwin 24.6.0
+105 verbose node v22.18.0
+106 verbose npm  v10.9.3
+107 verbose exit 0
+108 info ok
