@@ -10,28 +10,38 @@ type DbConfig = {
 }
 
 const getDbConfig = (): DbConfig => {
-    const port = Number(process.env.PGPORT || 5432)
+    const port = Number(process.env.PGPORT || process.env.POSTGRES_PORT || 5432)
 
     return {
-        host: process.env.PGHOST || 'localhost',
+        host: process.env.PGHOST || process.env.POSTGRES_HOST || 'localhost',
         port: Number.isFinite(port) ? port : 5432,
-        database: process.env.PGDATABASE || 'postgres',
-        user: process.env.PGUSER || process.env.USER || 'postgres',
-        password: process.env.PGPASSWORD || 'postgres',
-        ssl: process.env.PGSSL === 'true',
+        database: process.env.PGDATABASE || process.env.POSTGRES_DATABASE || 'postgres',
+        user: process.env.PGUSER || process.env.POSTGRES_USER || process.env.USER || 'postgres',
+        password: process.env.PGPASSWORD || process.env.POSTGRES_PASSWORD || 'postgres',
+        ssl: process.env.PGSSL === 'true' || !!process.env.POSTGRES_URL,
     }
 }
 
 const config = getDbConfig()
 
-export const pool = new Pool({
-    host: config.host,
-    port: config.port,
-    database: config.database,
-    user: config.user,
-    password: config.password,
-    ssl: config.ssl ? { rejectUnauthorized: false } : false,
-})
+// Vercel Postgres provides POSTGRES_URL, use it if available
+export const pool = new Pool(
+    process.env.POSTGRES_URL
+        ? {
+              connectionString: process.env.POSTGRES_URL,
+              ssl: {
+                  rejectUnauthorized: false,
+              },
+          }
+        : {
+              host: config.host,
+              port: config.port,
+              database: config.database,
+              user: config.user,
+              password: config.password,
+              ssl: config.ssl ? { rejectUnauthorized: false } : false,
+          }
+)
 
 export const ensureDatabaseSchema = async () => {
     await pool.query(`
