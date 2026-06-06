@@ -1,10 +1,15 @@
 {
   "version": 2,
-  "buildCommand": "npm install",
-  "outputDirectory": ".",
-  "functions": {
-    "app.ts": {
-      "runtime": "nodejs20.x"
+  "builds": [
+    {
+      "src": "app.ts",
+      "use": "@vercel/node"
     }
-  }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/app.ts"
+    }
+  ]
 }
