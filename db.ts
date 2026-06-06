@@ -145,6 +145,13 @@ export const ensureDatabaseSchema = async () => {
             updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
         )
     `)
+
+    // Insert default admin user if not exists
+    await pool.query(`
+        INSERT INTO users (username, password, role)
+        VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin')
+        ON CONFLICT (username) DO NOTHING
+    `)
 }
 
 export const testDatabaseConnection = async () => {
