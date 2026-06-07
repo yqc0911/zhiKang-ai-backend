@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import express from 'express'
-import { corsMiddleware } from './corsMiddleware.js'
+import cors from 'cors'
 import userRouter from './user.js'
 import featureRouter from './feature.js'
 import chatRouter from './chat.js'
@@ -12,7 +12,12 @@ import { ensureDatabaseSchema, testDatabaseConnection } from './db.js'
 
 const app = express()
 
-app.use(corsMiddleware)
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-App-Version'],
+    credentials: true
+}))
 app.use(express.json({ limit: '10mb' }))
 app.use('/api', userRouter)
 app.use('/api/features', featureRouter)
