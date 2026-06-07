@@ -12,8 +12,8 @@ import { ensureDatabaseSchema, testDatabaseConnection } from './db.js'
 
 const app = express()
 
-app.use(express.json({ limit: '10mb' }))
 app.use(corsMiddleware)
+app.use(express.json({ limit: '10mb' }))
 app.use('/api', userRouter)
 app.use('/api/features', featureRouter)
 app.use('/api', chatRouter)
