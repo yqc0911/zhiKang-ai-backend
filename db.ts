@@ -28,7 +28,7 @@ const config = getDbConfig()
 export const pool = new Pool(
     process.env.POSTGRES_URL
         ? {
-              connectionString: process.env.POSTGRES_URL,
+              connectionString: process.env.POSTGRES_URL + (process.env.POSTGRES_URL.includes('sslmode') ? '' : '&sslmode=verify-full'),
               ssl: {
                   rejectUnauthorized: false,
               },
@@ -39,7 +39,7 @@ export const pool = new Pool(
               database: config.database,
               user: config.user,
               password: config.password,
-              ssl: config.ssl ? { rejectUnauthorized: false } : false,
+              ssl: config.ssl ? { rejectUnauthorized: false, sslmode: 'verify-full' } : false,
           }
 )
 
