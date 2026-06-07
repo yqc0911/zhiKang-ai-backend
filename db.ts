@@ -39,7 +39,7 @@ export const pool = new Pool(
               database: config.database,
               user: config.user,
               password: config.password,
-              ssl: config.ssl ? { rejectUnauthorized: false, sslmode: 'verify-full' } : false,
+              ssl: config.ssl ? { rejectUnauthorized: false } : false,
           }
 )
 
