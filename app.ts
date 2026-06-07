@@ -12,9 +12,6 @@ import { ensureDatabaseSchema, testDatabaseConnection } from './db.js'
 
 const app = express()
 
-const QWEATHER_API_KEY = process.env.QWEATHER_API_KEY || ''
-const WEATHER_BASE_URL = 'https://dev.qweather.com/dev-api'
-
 app.use(express.json({ limit: '10mb' }))
 app.use(corsMiddleware)
 app.use('/api', userRouter)
@@ -39,9 +36,39 @@ const initDatabase = async () => {
 }
 
 // Middleware to ensure database is initialized
-app.use(async (req, res, next) => {
+app.use(async (_req, _res, next) => {
     await initDatabase()
     next()
+})
+
+// Root path handler
+app.get('/', (_req, res) => {
+    res.json({
+        success: true,
+        message: '👋 欢迎使用智康AI后端服务！',
+        version: '1.0.0',
+        endpoints: {
+            auth: {
+                login: 'POST /api/login',
+                register: 'POST /api/register',
+            },
+            features: {
+                list: 'GET /api/features',
+            },
+            chat: {
+                ai: 'POST /api/chat',
+                stream: 'POST /api/chat/stream',
+            },
+            health: {
+                reminders: 'GET /api/health/reminders',
+            },
+            shop: {
+                products: 'GET /api/shop/products',
+                categories: 'GET /api/shop/categories',
+            },
+        },
+        documentation: '访问 /api 路径使用服务',
+    })
 })
 
 // For local development
