@@ -12,11 +12,27 @@ import { ensureDatabaseSchema, testDatabaseConnection } from './db.js'
 
 const app = express()
 
+const allowedOrigins = [
+    'https://zhi-kang-ai.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:3000',
+    '*'
+]
+
 app.use(cors({
-    origin: '*',
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-App-Version'],
-    credentials: true
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-App-Version', 'Origin', 'Accept'],
+    exposedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204
 }))
 app.use(express.json({ limit: '10mb' }))
 app.use('/api', userRouter)
