@@ -476,4 +476,38 @@ userRouter.put('/profile', authMiddleware, async (req: AuthRequest, res) => {
     }
 })
 
+userRouter.delete('/profile/consultations/:id', authMiddleware, async (req: AuthRequest, res) => {
+    const id = req.params.id
+    if (!id) {
+        return res.status(400).json({ code: 400, message: '问诊记录ID不能为空', data: null })
+    }
+
+    try {
+        const userResult = await pool.query<{ id: number }>('SELECT id FROM users WHERE username = $1 LIMIT 1', [req.user?.username])
+        const user = userResult.rows[0]
+        if (!user) {
+            return res.status(404).json({ code: 404, message: '用户不存在', data: null })
+        }
+
+        const current = await pool.query<{ consultation_summaries: ConsultationSummary[] | string | null }>(
+            'SELECT consultation_summaries FROM user_profiles WHERE user_id = $1 LIMIT 1',
+            [user.id]
+        )
+        const existing = parseConsultationSummaries(current.rows[0]?.consultation_summaries)
+        const next = existing.filter((item) => item.id !== id)
+
+        await pool.query(
+            `UPDATE user_profiles
+             SET consultation_summaries = $2::jsonb, updated_at = NOW()
+             WHERE user_id = $1`,
+            [user.id, JSON.stringify(next)]
+        )
+
+        return res.json({ code: 200, message: '删除问诊记录成功', data: next })
+    } catch (error) {
+        console.error('Delete consultation failed:', error)
+        return res.status(500).json({ code: 500, message: '删除问诊记录失败', data: null })
+    }
+})
+
 export default userRouter
