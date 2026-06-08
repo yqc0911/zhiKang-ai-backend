@@ -1,5 +1,4 @@
-import dotenv from 'dotenv'
-dotenv.config()
+
 
 import express from 'express'
 import cors from 'cors'
@@ -9,6 +8,10 @@ import chatRouter from './chat.js'
 import shopRouter, { seedShopProducts } from './shop.js'
 import healthRouter from './health.js'
 import { ensureDatabaseSchema, testDatabaseConnection } from './db.js'
+
+import dotenv from 'dotenv'
+dotenv.config()
+
 
 const app = express()
 
