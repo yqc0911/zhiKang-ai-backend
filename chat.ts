@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import OpenAI from 'openai'
 import jwt from 'jsonwebtoken'
 import { pool } from './db.js'
 
@@ -13,11 +12,36 @@ interface Message {
   bodyPart?: string
 }
 
-function getOpenAI() {
-  return new OpenAI({
-    apiKey: process.env.QWEN_API_KEY,
-    baseURL: process.env.QWEN_API_BASE || 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+const getQwenChatCompletion = async (messages: unknown[]) => {
+  const apiKey = process.env.QWEN_API_KEY
+  if (!apiKey) throw new Error('QWEN_API_KEY 未配置')
+
+  const apiBase = (process.env.QWEN_API_BASE || 'https://dashscope.aliyuncs.com/compatible-mode/v1').replace(/\/$/, '')
+  const response = await fetch(`${apiBase}/chat/completions`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model: process.env.QWEN_MODEL || 'qwen-turbo',
+      messages,
+      temperature: 0.7,
+      max_tokens: 1000,
+    }),
   })
+
+  const payload = await response.json().catch(() => null) as any
+  if (!response.ok) {
+    const error = payload?.error || payload
+    const message = error?.message || `Qwen API request failed: ${response.status}`
+    const enhancedError = new Error(message) as Error & { code?: string; error?: unknown }
+    enhancedError.code = error?.code
+    enhancedError.error = error
+    throw enhancedError
+  }
+
+  return payload?.choices?.[0]?.message?.content || ''
 }
 
 const getUsernameFromRequest = (req: any) => {
@@ -109,8 +133,6 @@ chatRouter.post('/chat', async (req, res) => {
       });
     }
 
-    const openai = getOpenAI();
-
     const formattedMessages = messages.map(msg => {
       if (msg.image) {
         const contentArray = [];
@@ -148,13 +170,7 @@ chatRouter.post('/chat', async (req, res) => {
 
     let responseContent = ''
     try {
-      const completion = await openai.chat.completions.create({
-        model: process.env.QWEN_MODEL || 'qwen-turbo',
-        messages: [systemMessage, ...formattedMessages] as any,
-        temperature: 0.7,
-        max_tokens: 1000,
-      })
-      responseContent = completion.choices[0]?.message?.content || ''
+      responseContent = await getQwenChatCompletion([systemMessage, ...formattedMessages])
     } catch (error: any) {
       console.error('Qwen API error:', error)
       const errorCode = error?.code || error?.error?.code
