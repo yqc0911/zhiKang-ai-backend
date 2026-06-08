@@ -24,7 +24,7 @@ const getQwenChatCompletion = async (messages: unknown[]) => {
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: process.env.QWEN_MODEL || 'qwen-turbo',
+      model: process.env.QWEN_MODEL || 'qwen3.7-plus',
       messages,
       temperature: 0.7,
       max_tokens: 1000,
@@ -35,9 +35,17 @@ const getQwenChatCompletion = async (messages: unknown[]) => {
   if (!response.ok) {
     const error = payload?.error || payload
     const message = error?.message || `Qwen API request failed: ${response.status}`
-    const enhancedError = new Error(message) as Error & { code?: string; error?: unknown }
+    const enhancedError = new Error(message) as Error & { code?: string; error?: unknown; status?: number; payload?: unknown }
     enhancedError.code = error?.code
+    enhancedError.status = response.status
     enhancedError.error = error
+    enhancedError.payload = payload
+    console.error('Qwen API raw error response:', {
+      status: response.status,
+      payload,
+      apiBase,
+      model: process.env.QWEN_MODEL || 'qwen3.7-plus',
+    })
     throw enhancedError
   }
 
