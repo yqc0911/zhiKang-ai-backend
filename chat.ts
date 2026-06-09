@@ -24,7 +24,7 @@ const getQwenChatCompletion = async (messages: unknown[]) => {
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: process.env.QWEN_MODEL || 'qwen3.7-plus',
+      model: process.env.QWEN_MODEL || 'glm-5',
       messages,
       temperature: 0.7,
       max_tokens: 1000,
@@ -44,7 +44,7 @@ const getQwenChatCompletion = async (messages: unknown[]) => {
       status: response.status,
       payload,
       apiBase,
-      model: process.env.QWEN_MODEL || 'qwen3.7-plus',
+      model: process.env.QWEN_MODEL || 'qwen3-omni-flash',
     })
     throw enhancedError
   }
