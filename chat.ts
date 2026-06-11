@@ -129,6 +129,61 @@ chatRouter.get('/chat/history', async (req, res) => {
   }
 })
 
+chatRouter.delete('/chat/threads/:threadId', async (req, res) => {
+  const username = getUsernameFromRequest(req)
+  if (!username) {
+    return res.status(401).json({ code: 401, message: '请先登录', data: null })
+  }
+
+  const { threadId } = req.params
+  if (!threadId) {
+    return res.status(400).json({ code: 400, message: '会话ID不能为空', data: null })
+  }
+
+  const client = await pool.connect()
+  try {
+    await client.query('BEGIN')
+
+    const userResult = await client.query<{ id: number }>('SELECT id FROM users WHERE username = $1 LIMIT 1', [username])
+    const userId = userResult.rows[0]?.id
+    if (!userId) {
+      await client.query('ROLLBACK')
+      return res.status(404).json({ code: 404, message: '用户不存在', data: null })
+    }
+
+    await client.query('DELETE FROM chat_messages WHERE thread_id = $1 AND user_id = $2', [threadId, userId])
+    await client.query('DELETE FROM chat_threads WHERE id = $1 AND user_id = $2', [threadId, userId])
+
+    const profileResult = await client.query<{ consultation_summaries: unknown }>(
+      'SELECT consultation_summaries FROM user_profiles WHERE user_id = $1 LIMIT 1',
+      [userId],
+    )
+    const summariesValue = profileResult.rows[0]?.consultation_summaries
+    const summaries = Array.isArray(summariesValue)
+      ? summariesValue
+      : typeof summariesValue === 'string'
+        ? JSON.parse(summariesValue || '[]')
+        : []
+    const nextSummaries = summaries.filter((item: any) => item?.id !== threadId)
+
+    await client.query(
+      `UPDATE user_profiles
+       SET consultation_summaries = $2::jsonb, updated_at = NOW()
+       WHERE user_id = $1`,
+      [userId, JSON.stringify(nextSummaries)],
+    )
+
+    await client.query('COMMIT')
+    return res.json({ code: 200, message: '删除会话成功', data: { threadId, consultationSummaries: nextSummaries } })
+  } catch (error) {
+    await client.query('ROLLBACK')
+    console.error('Delete chat thread failed:', error)
+    return res.status(500).json({ code: 500, message: '删除会话失败', data: null })
+  } finally {
+    client.release()
+  }
+})
+
 chatRouter.post('/chat', async (req, res) => {
   try {
     const { messages }: { messages: Message[] } = req.body;
